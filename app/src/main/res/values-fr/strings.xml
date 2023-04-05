@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UniChat</string>
+    <string name="verify_number">+243 82 68 61 073</string>
+    <string name="verify_txt">Veuillez saisir le code vérification envoyé à</string>
+    <string name="validate">validate</string>
+    <string name="phone_number">Numéro de telephone</string>
+    <string name="send">send</string>
+    <string name="opt_verification">OPT Verification</string>
+    <string name="one_time_password"> Mot de pass à usage unique</string>
+    <string name="we_will_send_you_an">Nous vous enverrons un </string>
+    <string name="on_this_mobile_number">sur ce numèro de mobile</string>
+    <string name="by_zgeniuscoders">By zgeniuscoders</string>
+    <string name="required_field">Cette champ est requis</string>
+</resources>

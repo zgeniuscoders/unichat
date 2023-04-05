@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">UniChat</string>
+    <string name="verify_number">+243 82 68 61 073</string>
+    <string name="verify_txt">please type the verification code sent to</string>
+    <string name="validate">validate</string>
+    <string name="phone_number">Phone number</string>
+    <string name="send">send</string>
+    <string name="opt_verification">OPT Verification</string>
+    <string name="one_time_password">One time password</string>
+    <string name="we_will_send_you_an">We will send you an </string>
+    <string name="on_this_mobile_number">on this mobile number</string>
+    <string name="by_zgeniuscoders">By zgeniuscoders</string>
+    <string name="required_field">This field is required</string>
+</resources>
