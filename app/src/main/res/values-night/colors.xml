@@ -11,4 +11,6 @@
     <color name="card_background">#FF000000</color>
     <color name="dark_black">#FFFFFFFF</color>
     <color name="dark_black_bar">#6C6C6C</color>
+    <color name="grey">#878585</color>
+    <color name="red">#F14343</color>
 </resources>
