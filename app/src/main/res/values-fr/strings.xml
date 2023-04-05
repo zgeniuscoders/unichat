@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">UniChat</string>
+    <string name="app_name">Uni Chat</string>
     <string name="verify_number">+243 82 68 61 073</string>
     <string name="verify_txt">Veuillez saisir le code vérification envoyé à</string>
     <string name="validate">validate</string>
