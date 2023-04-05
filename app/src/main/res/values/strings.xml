@@ -15,5 +15,7 @@
     <string name="post_user_name">Coordination</string>
     <string name="post_time_ago">il ya 25 minutes</string>
     <string name="post_content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur eaque fugit id maiores mollitia non qui similique unde? Adipisci aperiam asperiores consectetur eius, facilis nihil nulla sapiente sint tempore veritatis. Enim incidunt inventore nulla numquam, optio placeat tempora voluptatem!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
