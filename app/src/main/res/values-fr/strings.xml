@@ -24,4 +24,13 @@
     <string name="groups">Groupes</string>
     <string name="quit">Quitter</string>
     <string name="all_groups">Voir tout</string>
+    <string name="group_name">Nom</string>
+    <string name="group_desc">Description</string>
+    <string name="create">crée</string>
+    <string name="join">rejoindre</string>
+    <string name="pseudo">Nom d\'utilisateur</string>
+    <string name="email">Adresse email</string>
+    <string name="next">suivant</string>
+    <string name="choose_department">Quelle est votre departement</string>
+    <string name="choose_faculty">Quelle est votre faculté</string>
 </resources>

@@ -26,5 +26,10 @@
     <string name="group_name">Name</string>
     <string name="group_desc">Description</string>
     <string name="create">create</string>
-
+    <string name="join">join</string>
+    <string name="pseudo">Username</string>
+    <string name="email">Email address</string>
+    <string name="next">next</string>
+    <string name="choose_department">Choose a your department</string>
+    <string name="choose_faculty">Choose your faculty</string>
 </resources>

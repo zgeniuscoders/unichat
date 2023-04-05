@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="20dp"
+    tools:context=".fragments.UserFacultyInfoFragment">
+
+    <Spinner
+        android:id="@+id/faculty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/grey" />
+
+    <Spinner
+        android:id="@+id/departement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/faculty"
+        android:layout_marginTop="10dp"
+        android:background="@color/grey" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/departement"
+        android:backgroundTint="@color/blue"
+        android:text="@string/next"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

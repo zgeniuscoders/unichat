@@ -4,55 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:padding="20dp"
-    tools:context=".activities.AddGroupActivity">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/group_profile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="10dp"
-        tools:src="@tools:sample/avatars" />
+    tools:context=".fragments.UserProfileInfoFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutName"
+        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/group_profile"
-        android:layout_marginTop="20dp"
-        android:hint="@string/group_name">
+        android:hint="@string/pseudo">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutDesc"
+        android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inputLayoutName"
+        android:layout_below="@id/textInputLayout"
         android:layout_marginTop="10dp"
-        android:hint="@string/group_desc">
+        android:hint="@string/email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/description"
+            android:id="@+id/email_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_create"
+        android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inputLayoutDesc"
-        android:text="@string/create"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/blue"/>
+        android:layout_below="@+id/textInputLayout2"
+        android:backgroundTint="@color/blue"
+        android:text="@string/next"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

@@ -2,13 +2,13 @@ package cd.zgeniuscoders.unichat.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import cd.zgeniuscoders.unichat.databinding.ActivityAddUserChatBinding
+import cd.zgeniuscoders.unichat.databinding.ActivityAddGroupBinding
 
-class AddUserChatActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityAddUserChatBinding
+class AllGroupActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddGroupBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddUserChatBinding.inflate(layoutInflater)
+        binding = ActivityAddGroupBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
