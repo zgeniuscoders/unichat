@@ -1,11 +1,12 @@
 package cd.zgeniuscoders.unichat.models
 
 data class Chat(
-    val id: String,
-    val username: String,
-    val message: String? = null,
+    val senderId: String,
+    val receiverId: String,
+    var message: String? = null,
     val image: String? = null,
-    val isReceive: Boolean = true,
+    val isImage: Boolean = false,
     val isRead: Boolean = false,
-    val sendAt: Long
+    var isReceiver: Boolean = false,
+    val timestamp: Long
 )

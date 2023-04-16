@@ -10,5 +10,6 @@ data class User(
     val faculty: String? = null,
     val department: String? = null,
     val isCertified: Boolean = false,
-    val createdAt: Long? = null
+    val createdAt: Long? = null,
+    val presence: Boolean = false
 )

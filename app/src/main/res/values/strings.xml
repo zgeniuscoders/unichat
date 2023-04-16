@@ -33,4 +33,11 @@
     <string name="choose_department">Choose a your department</string>
     <string name="choose_faculty">Choose your faculty</string>
     <string name="send_opt">Sending opt...</string>
+    <string name="userPresence">Online</string>
+    <string name="userPresenceOffline">Offline</string>
+    <string name="delete_for_everything">Delete for everyone</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_for_me">Delete for me</string>
+    <string name="msgDelete">This message is remove</string>
+    <string name="deleteMsg">Delete Message</string>
 </resources>
