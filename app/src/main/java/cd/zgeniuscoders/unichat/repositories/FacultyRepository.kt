@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class FacultyRepository {
     companion object {
-        private const val FACULTY_COLLECTION = "Facultys"
+        private const val FACULTY_COLLECTION = "Faculties"
         val COLLECTION_REF = FirebaseFirestore.getInstance().collection(FACULTY_COLLECTION)
     }
 

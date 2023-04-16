@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Uni Chat</string>
-    <string name="verify_number">+243 82 68 61 073</string>
+    <string name="verify_number">+243826861073</string>
     <string name="verify_txt">Veuillez saisir le code vérification envoyé à</string>
     <string name="validate">validate</string>
     <string name="phone_number">Numéro de telephone</string>
-    <string name="send">send</string>
+    <string name="send">envoyer</string>
     <string name="opt_verification">OPT Verification</string>
     <string name="one_time_password"> Mot de pass à usage unique</string>
     <string name="we_will_send_you_an">Nous vous enverrons un </string>
     <string name="on_this_mobile_number">sur ce numèro de mobile</string>
     <string name="by_zgeniuscoders">By zgeniuscoders</string>
     <string name="required_field">Cette champ est requis</string>
-    <string name="search">Search...</string>
+    <string name="search">Recherche...</string>
     <string name="post_user_name">Coordination</string>
     <string name="post_time_ago">il ya 25 minutes</string>
     <string name="post_content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur eaque fugit id maiores mollitia non qui similique unde? Adipisci aperiam asperiores consectetur eius, facilis nihil nulla sapiente sint tempore veritatis. Enim incidunt inventore nulla numquam, optio placeat tempora voluptatem!</string>
@@ -33,4 +33,5 @@
     <string name="next">suivant</string>
     <string name="choose_department">Quelle est votre departement</string>
     <string name="choose_faculty">Quelle est votre faculté</string>
+    <string name="send_opt">Envoie de l\'opt...</string>
 </resources>

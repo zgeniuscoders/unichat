@@ -32,4 +32,5 @@
     <string name="next">next</string>
     <string name="choose_department">Choose a your department</string>
     <string name="choose_faculty">Choose your faculty</string>
+    <string name="send_opt">Sending opt...</string>
 </resources>

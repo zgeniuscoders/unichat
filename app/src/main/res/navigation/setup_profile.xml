@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mini"
+    app:startDestination="@id/userProfileInfoFragment">
+
+    <fragment
+        android:id="@+id/userProfileInfoFragment"
+        android:name="cd.zgeniuscoders.unichat.fragments.UserProfileInfoFragment"
+        android:label="fragment_user_profile_info"
+        tools:layout="@layout/fragment_user_profile_info" >
+        <action
+            android:id="@+id/action_userProfileInfoFragment_to_userFacultyInfoFragment"
+            app:destination="@id/userFacultyInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFacultyInfoFragment"
+        android:name="cd.zgeniuscoders.unichat.fragments.UserFacultyInfoFragment"
+        android:label="fragment_user_faculty_info"
+        tools:layout="@layout/fragment_user_faculty_info" >
+        <action
+            android:id="@+id/action_userFacultyInfoFragment_to_userProfileImageFragment"
+            app:destination="@id/userProfileImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileImageFragment"
+        android:name="cd.zgeniuscoders.unichat.fragments.UserProfileImageFragment"
+        android:label="fragment_user_profile_image"
+        tools:layout="@layout/fragment_user_profile_image" />
+</navigation>

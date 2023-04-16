@@ -36,6 +36,7 @@
             android:layout_marginBottom="@dimen/_20dp"/>
 
         <com.mukeshsolanki.OtpView
+            android:id="@+id/opt_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
