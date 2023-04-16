@@ -16,7 +16,8 @@ class VerificationActivity : AppCompatActivity() {
         binding.btnSend.setOnClickListener {
             val edtNumber = binding.phoneNumberEdt.text.toString()
             if (edtNumber.isEmpty()) {
-                binding.phoneNumberEdt.error = getString(R.string.required_field)
+                binding.layoutTextInput.error = getString(R.string.required_field)
+                binding.layoutTextInput.isErrorEnabled = true
             } else {
                 Intent(this, OPTVerifyActivity::class.java).apply {
                     this.putExtra("phone_number", edtNumber)

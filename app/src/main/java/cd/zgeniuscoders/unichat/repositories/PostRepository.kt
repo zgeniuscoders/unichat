@@ -1,6 +1,7 @@
 package cd.zgeniuscoders.unichat.repositories
 
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -10,8 +11,8 @@ class PostRepository {
         val COLLECTION_REF = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
     }
 
-    fun getPosts(): DocumentReference {
-        return COLLECTION_REF.document()
+    fun getPosts(): CollectionReference {
+        return COLLECTION_REF
     }
 
     fun getPost(postId: String): DocumentReference {

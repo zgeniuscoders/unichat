@@ -8,7 +8,6 @@
     android:padding="@dimen/_20dp"
     tools:context=".activities.VerificationActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,6 +78,7 @@
                 android:padding="20dp">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutTextInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -102,6 +102,5 @@
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

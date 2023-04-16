@@ -1,6 +1,9 @@
 package cd.zgeniuscoders.unichat.repositories
 
+import cd.zgeniuscoders.unichat.models.User
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -10,23 +13,27 @@ class UserRepository {
         val COLLECTION_REF = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
     }
 
+    fun currentUser(): FirebaseUser? {
+        return FirebaseAuth.getInstance().currentUser
+    }
+
     fun getUsers(): DocumentReference {
         return COLLECTION_REF.document()
     }
 
-    fun getUser(UserId: String): DocumentReference {
-        return COLLECTION_REF.document(UserId)
+    fun getUser(userId: String): DocumentReference {
+        return COLLECTION_REF.document(userId)
     }
 
-    fun addUser(key: String, User: HashMap<String, Any>): Task<Void> {
-        return ChatRepository.COLLECTION_REF.document(key).set(User)
+    fun addUser(key: String, user: User): Task<Void> {
+        return ChatRepository.COLLECTION_REF.document(key).set(user)
     }
 
-    fun updateUser(UserId: String, User: HashMap<String, Any>): Task<Void> {
-        return COLLECTION_REF.document(UserId).update(User)
+    fun updateUser(userId: String, user: HashMap<String, Any>): Task<Void> {
+        return COLLECTION_REF.document(userId).update(user)
     }
 
-    fun deleteUser(UserId: String): Task<Void> {
-        return COLLECTION_REF.document(UserId).delete()
+    fun deleteUser(userId: String): Task<Void> {
+        return COLLECTION_REF.document(userId).delete()
     }
 }

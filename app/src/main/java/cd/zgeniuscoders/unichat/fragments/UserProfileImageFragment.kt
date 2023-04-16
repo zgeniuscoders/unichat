@@ -3,6 +3,7 @@ package cd.zgeniuscoders.unichat.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.navigation.fragment.findNavController
 import cd.zgeniuscoders.unichat.R
 import cd.zgeniuscoders.unichat.activities.MainActivity
 import cd.zgeniuscoders.unichat.databinding.FragmentUserProfileImageBinding
@@ -86,6 +86,11 @@ class UserProfileImageFragment : Fragment() {
 
         UserRepository().updateUser(uuid, hash)
         dialog!!.dismiss()
+
+        val sharedPreferences = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isAuth", true)
+        editor.apply()
 
         Intent(requireContext(), MainActivity::class.java).apply {
             startActivity(this)
