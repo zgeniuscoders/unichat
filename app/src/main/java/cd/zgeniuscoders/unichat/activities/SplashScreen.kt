@@ -1,5 +1,6 @@
 package cd.zgeniuscoders.unichat.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,13 +16,23 @@ class SplashScreen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedPreferences = this.getSharedPreferences("auth", Context.MODE_PRIVATE)
+        val isAuthenticated = sharedPreferences.getBoolean("isAuth", false)
+
         handler = Handler(Looper.getMainLooper())
 
         handler.postDelayed({
-            Intent(this, VerificationActivity::class.java).apply {
-                startActivity(this)
+            if (isAuthenticated) {
+                Intent(this, MainActivity::class.java).apply {
+                    startActivity(this)
+                }
+                finish()
+            } else {
+                Intent(this, VerificationActivity::class.java).apply {
+                    startActivity(this)
+                }
+                finish()
             }
-            finish()
         }, 3000)
     }
 }

@@ -6,21 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import cd.zgeniuscoders.uniDepartment.repositories.DepartementRepository
 import cd.zgeniuscoders.uniFaculty.repositories.FacultyRepository
 import cd.zgeniuscoders.unichat.R
 import cd.zgeniuscoders.unichat.databinding.FragmentUserFacultyInfoBinding
 import cd.zgeniuscoders.unichat.models.Department
 import cd.zgeniuscoders.unichat.models.Faculty
+import cd.zgeniuscoders.unichat.repositories.UserRepository
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.toObject
 
 class UserFacultyInfoFragment : Fragment() {
     private lateinit var binding: FragmentUserFacultyInfoBinding
     private var facultyList = arrayListOf<String>()
+    private var departmentList = arrayListOf<String>()
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentUserFacultyInfoBinding.inflate(layoutInflater)
 
@@ -29,6 +32,22 @@ class UserFacultyInfoFragment : Fragment() {
         binding.faculty.setOnItemClickListener { adapterView, view, i, l ->
             val facultyName = facultyList[binding.faculty.selectedItemPosition]
             getDepartment(facultyName)
+        }
+
+        binding.btnNext.setOnClickListener {
+
+            val department = departmentList[binding.departement.selectedItemPosition]
+            val faculty = facultyList[binding.faculty.selectedItemPosition]
+
+            val uuid = FirebaseAuth.getInstance().currentUser!!.uid
+
+            val hash = HashMap<String, Any>()
+            hash["faculty"] = faculty
+            hash["department"] = department
+
+            UserRepository().updateUser(uuid, hash)
+
+            findNavController().navigate(R.id.action_userFacultyInfoFragment_to_userProfileImageFragment)
         }
 
         return binding.root
@@ -58,10 +77,9 @@ class UserFacultyInfoFragment : Fragment() {
     }
 
     private fun getDepartment(faculty: String) {
-        val departmentList = arrayListOf<String>()
+        departmentList = arrayListOf<String>()
         val departmentRepo = DepartementRepository()
-        departmentRepo.getDepartments()
-            .whereEqualTo("faculty", faculty)
+        departmentRepo.getDepartments().whereEqualTo("faculty", faculty)
             .addSnapshotListener { querySnap, error ->
                 if (error != null) {
                     return@addSnapshotListener

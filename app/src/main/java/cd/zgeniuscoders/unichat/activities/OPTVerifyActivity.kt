@@ -2,7 +2,9 @@ package cd.zgeniuscoders.unichat.activities
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
@@ -67,6 +69,12 @@ class OPTVerifyActivity : AppCompatActivity() {
             val credentials = PhoneAuthProvider.getCredential(verificationId!!, opt)
             auth!!.signInWithCredential(credentials).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    val sharedPreferences =
+                        applicationContext.getSharedPreferences("auth", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putBoolean("isAuth", true)
+                    editor.apply()
+
                     Intent(this, CreateUserProfileActivity::class.java).apply {
                         startActivity(this)
                     }
