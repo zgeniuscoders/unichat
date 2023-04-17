@@ -21,8 +21,8 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/baseline_menu_24" />
@@ -36,14 +36,17 @@
                 android:textSize="30sp" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/add_post"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/baseline_add_box_24" />
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <fragment
         android:id="@+id/fragment_container"

@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class UserRepository {
     companion object {
@@ -17,6 +18,10 @@ class UserRepository {
         return FirebaseAuth.getInstance().currentUser
     }
 
+    fun getUserByNumber(contactList: List<String>): Query {
+        return COLLECTION_REF.whereArrayContains("number", contactList)
+    }
+
     fun getUsers(): DocumentReference {
         return COLLECTION_REF.document()
     }
@@ -26,7 +31,7 @@ class UserRepository {
     }
 
     fun addUser(key: String, user: User): Task<Void> {
-        return ChatRepository.COLLECTION_REF.document(key).set(user)
+        return COLLECTION_REF.document(key).set(user)
     }
 
     fun updateUser(userId: String, user: HashMap<String, Any>): Task<Void> {

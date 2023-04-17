@@ -1,5 +1,6 @@
 package cd.zgeniuscoders.unichat.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import cd.zgeniuscoders.unichat.R
@@ -15,6 +16,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        binding.addPost.setOnClickListener {
+            Intent(this,AddPostActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
     }
 
     override fun onResume() {

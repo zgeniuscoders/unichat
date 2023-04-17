@@ -1,5 +1,6 @@
 package cd.zgeniuscoders.unichat.repositories
 
+import cd.zgeniuscoders.unichat.models.Post
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
@@ -15,12 +16,16 @@ class PostRepository {
         return COLLECTION_REF
     }
 
+    fun getKey(): String {
+        return COLLECTION_REF.document().id
+    }
+
     fun getPost(postId: String): DocumentReference {
         return COLLECTION_REF.document(postId)
     }
 
-    fun addPost(key: String, post: HashMap<String, Any>): Task<Void> {
-        return ChatRepository.COLLECTION_REF.document(key).set(post)
+    fun addPost(key: String, post: Post): Task<Void> {
+        return COLLECTION_REF.document(key).set(post)
     }
 
     fun updatePost(postId: String, post: HashMap<String, Any>): Task<Void> {

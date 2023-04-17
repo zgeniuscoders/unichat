@@ -11,16 +11,7 @@
         android:label="fragment_user_profile_info"
         tools:layout="@layout/fragment_user_profile_info" >
         <action
-            android:id="@+id/action_userProfileInfoFragment_to_userFacultyInfoFragment"
-            app:destination="@id/userFacultyInfoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userFacultyInfoFragment"
-        android:name="cd.zgeniuscoders.unichat.fragments.UserFacultyInfoFragment"
-        android:label="fragment_user_faculty_info"
-        tools:layout="@layout/fragment_user_faculty_info" >
-        <action
-            android:id="@+id/action_userFacultyInfoFragment_to_userProfileImageFragment"
+            android:id="@+id/action_userProfileInfoFragment_to_userProfileImageFragment"
             app:destination="@id/userProfileImageFragment" />
     </fragment>
     <fragment

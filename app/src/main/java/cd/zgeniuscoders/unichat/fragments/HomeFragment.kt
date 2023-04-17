@@ -1,6 +1,7 @@
 package cd.zgeniuscoders.unichat.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ import com.google.firebase.firestore.ktx.toObject
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var postList: ArrayList<Post>
+    private var postList: ArrayList<Post> = ArrayList<Post>()
     private lateinit var postAdapter: PostAdapter
 
     override fun onCreateView(
@@ -24,12 +25,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-
-        postList = ArrayList()
-        postAdapter = PostAdapter(requireContext(), postList)
-
+//
         loadUser()
-
+//
         loadPosts()
 
         return binding.root
@@ -40,10 +38,7 @@ class HomeFragment : Fragment() {
         postRepository.getPosts()
             .addSnapshotListener { querySnap, error ->
 
-
-                if (error != null) {
-                    return@addSnapshotListener
-                }
+                if (error != null) return@addSnapshotListener
 
                 if (querySnap != null) {
                     postList.clear()
@@ -53,7 +48,9 @@ class HomeFragment : Fragment() {
                         postList.add(data!!)
                     }
 
-                    binding.recyclerPost.adapter = postAdapter
+
+                    Log.i("POSTS", postList.toString())
+                    binding.recyclerPost.adapter = PostAdapter(requireContext(), postList)
                 }
 
             }
@@ -77,7 +74,6 @@ class HomeFragment : Fragment() {
 
         }
     }
-
 
 
 }

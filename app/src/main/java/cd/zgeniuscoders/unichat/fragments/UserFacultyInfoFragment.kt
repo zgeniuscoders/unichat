@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import cd.zgeniuscoders.uniDepartment.repositories.DepartementRepository
@@ -29,9 +30,22 @@ class UserFacultyInfoFragment : Fragment() {
 
         getFaculties()
 
-        binding.faculty.setOnItemClickListener { adapterView, view, i, l ->
-            val facultyName = facultyList[binding.faculty.selectedItemPosition]
-            getDepartment(facultyName)
+        binding.faculty.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                p1: View?,
+                positon: Int,
+                p3: Long
+            ) {
+                val itemPos = parent!!.getItemAtPosition(positon).toString().toInt()
+                val facultyName = facultyList[itemPos]
+                getDepartment(facultyName)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
 
         binding.btnNext.setOnClickListener {
@@ -45,9 +59,9 @@ class UserFacultyInfoFragment : Fragment() {
             hash["faculty"] = faculty
             hash["department"] = department
 
-            UserRepository().updateUser(uuid, hash)
-
-            findNavController().navigate(R.id.action_userFacultyInfoFragment_to_userProfileImageFragment)
+            UserRepository().updateUser(uuid, hash).addOnCompleteListener {
+//                findNavController().navigate(R.id.action_userFacultyInfoFragment_to_userProfileImageFragment)
+            }
         }
 
         return binding.root

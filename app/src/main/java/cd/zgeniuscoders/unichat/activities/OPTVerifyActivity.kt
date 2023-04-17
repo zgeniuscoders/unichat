@@ -69,6 +69,12 @@ class OPTVerifyActivity : AppCompatActivity() {
             val credentials = PhoneAuthProvider.getCredential(verificationId!!, opt)
             auth!!.signInWithCredential(credentials).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+
+                    val sharedPreferences = getSharedPreferences("auth.number", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("number", edtNumber)
+                    editor.apply()
+
                     Intent(this, CreateUserProfileActivity::class.java).apply {
                         startActivity(this)
                     }

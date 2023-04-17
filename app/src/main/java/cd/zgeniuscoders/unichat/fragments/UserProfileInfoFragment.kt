@@ -1,5 +1,6 @@
 package cd.zgeniuscoders.unichat.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,19 +22,19 @@ class UserProfileInfoFragment : Fragment() {
 
         binding = FragmentUserProfileInfoBinding.inflate(layoutInflater)
 
-        val edtUsername = binding.username.text.toString()
-        val edtEmail = binding.emailAddress.text.toString()
-
         binding.btnNext.setOnClickListener {
 
-            if (edtEmail.isNotEmpty() && edtUsername.isNotEmpty()) {
-                savaData(edtEmail, edtUsername)
-            } else {
+            val edtUsername = binding.username.text.toString()
+            val edtEmail = binding.emailAddress.text.toString()
+
+            if (edtEmail.isEmpty() && edtUsername.isEmpty()) {
                 binding.textInputLayout.error = getString(R.string.required_field)
                 binding.textInputLayout.isErrorEnabled = true
 
                 binding.textInputLayout2.error = getString(R.string.required_field)
                 binding.textInputLayout2.isErrorEnabled = true
+            } else {
+                savaData(edtEmail, edtUsername)
             }
         }
 
@@ -43,14 +44,20 @@ class UserProfileInfoFragment : Fragment() {
 
     private fun savaData(edtEmail: String, edtUsername: String) {
 
+        val sharedPreferences =
+            requireContext().getSharedPreferences("auth.number", Context.MODE_PRIVATE)
+        val number = sharedPreferences.getString("number", "")
+
+
         val uuid = FirebaseAuth.getInstance().currentUser!!.uid
 
         val user = User(
-            id = uuid, username = edtUsername, email = edtEmail
+            number = number!!, id = uuid, username = edtUsername, email = edtEmail
         )
 
-        UserRepository().addUser(uuid, user)
-        findNavController().navigate(R.id.action_userProfileInfoFragment_to_userFacultyInfoFragment)
+        UserRepository().addUser(uuid, user).addOnCompleteListener {
+            findNavController().navigate(R.id.action_userProfileInfoFragment_to_userProfileImageFragment)
+        }
 
     }
 

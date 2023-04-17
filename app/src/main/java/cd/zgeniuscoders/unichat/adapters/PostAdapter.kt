@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -65,21 +67,29 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
 
     override fun getItemCount() = posts.size
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val data = postsFilterdList
+        val post = postsFilterdList[position]
 
-        getUserInfo(data[position], holder)
-        holder.binding.postContent.text = data[position].content
+        getUserInfo(post, holder)
 
-        getLikeInfo(data[position], holder)
-        getCommentInfo(data[position], holder)
+        if (post.content == "") holder.binding.postContent.visibility = View.GONE
+        if (post.image == "") holder.binding.postImage.visibility = View.GONE
+
+        holder.binding.postContent.text = post.content
+
+        if (post.image != "") {
+            Glide.with(context).load(post.image).into(holder.binding.postImage)
+        }
+
+        getLikeInfo(post, holder)
+        getCommentInfo(post, holder)
 
         holder.binding.btnPostLike.setOnClickListener {
-            likePost(data[position].id)
+            likePost(post.id)
         }
 
         holder.binding.btnPostComment.setOnClickListener {
             Intent(context, CommentActivity::class.java).apply {
-                this.putExtra("postId", data[position].id)
+                this.putExtra("postId", post.id)
                 context.startActivity(this)
             }
         }
@@ -133,13 +143,13 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
             .addSnapshotListener { querySnap, error ->
                 if (error != null) return@addSnapshotListener
                 if (querySnap != null) {
-                    if (querySnap.exists()) {
-                        holder.binding.imgLikeBtn.background =
-                            ColorDrawable(Color.parseColor(R.color.blue.toString()))
-                    } else {
-                        holder.binding.imgLikeBtn.background =
-                            ColorDrawable(Color.parseColor(R.color.dark_black.toString()))
-                    }
+//                    if (querySnap.exists()) {
+//                        holder.binding.imgLikeBtn.background =
+//                            ColorDrawable(Color.parseColor(R.color.blue.toString()))
+//                    } else {
+//                        holder.binding.imgLikeBtn.background =
+//                            ColorDrawable(Color.parseColor(R.color.dark_black.toString()))
+//                    }
                 }
             }
 

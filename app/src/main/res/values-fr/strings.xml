@@ -36,4 +36,9 @@
     <string name="send_opt">Envoie de l\'opt...</string>
     <string name="userPresence">Enligne</string>
     <string name="userPresenceOffline">Déconnecter</string>
+    <string name="delete_for_everything">Supprimer pour tous</string>
+    <string name="cancel">Annuler</string>
+    <string name="delete_for_me">Supprimer pour moi</string>
+    <string name="msgDelete">Cette message a été supprimer</string>
+    <string name="deleteMsg">Supprimer</string>
 </resources>

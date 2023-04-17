@@ -76,25 +76,30 @@ class UserProfileImageFragment : Fragment() {
 
     @SuppressLint("SimpleDateFormat")
     private fun saveUser() {
+
         val uuid = FirebaseAuth.getInstance().currentUser!!.uid
         val currentDate = Calendar.getInstance().time
         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(currentDate)
+
+        val sharedPreferences =
+            requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
 
         val hash = HashMap<String, Any>()
         hash["createdAt"] = date
         hash["profile"] = imgUrl.toString()
 
-        UserRepository().updateUser(uuid, hash)
-        dialog!!.dismiss()
+        UserRepository().updateUser(uuid, hash).addOnCompleteListener {
+            dialog!!.dismiss()
 
-        val sharedPreferences = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isAuth", true)
-        editor.apply()
+            editor.putBoolean("isAuth", true)
+            editor.apply()
 
-        Intent(requireContext(), MainActivity::class.java).apply {
-            startActivity(this)
+            Intent(requireContext(), MainActivity::class.java).apply {
+                startActivity(this)
+            }
         }
+
     }
 
 }
