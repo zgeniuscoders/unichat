@@ -12,10 +12,10 @@
         android:id="@+id/user_profile"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginEnd="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@drawable/images" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create"

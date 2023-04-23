@@ -13,6 +13,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import cd.zgeniuscoders.unichat.R
+import cd.zgeniuscoders.unichat.SaveFile
 import cd.zgeniuscoders.unichat.activities.CommentActivity
 import cd.zgeniuscoders.unichat.databinding.ItemPostBinding
 import cd.zgeniuscoders.unichat.models.Post
@@ -91,6 +92,12 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
             Intent(context, CommentActivity::class.java).apply {
                 this.putExtra("postId", post.id)
                 context.startActivity(this)
+            }
+        }
+
+        holder.binding.btnPostSave.setOnClickListener {
+            if (post.image != "") {
+                SaveFile(context).downloadImageFromFirestore(post.image!!)
             }
         }
     }

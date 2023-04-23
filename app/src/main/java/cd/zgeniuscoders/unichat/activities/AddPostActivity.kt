@@ -88,6 +88,8 @@ class AddPostActivity : AppCompatActivity() {
 
         postRepository.addPost(postKey, post).addOnCompleteListener {
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+            img = null
+            binding.postContent.text = null
         }
 
     }
