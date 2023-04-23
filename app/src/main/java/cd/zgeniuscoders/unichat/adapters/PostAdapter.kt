@@ -1,15 +1,15 @@
 package cd.zgeniuscoders.unichat.adapters
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import cd.zgeniuscoders.unichat.R
@@ -28,6 +28,7 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
     private var postsFilterdList: List<Post> = ArrayList()
     private val likeRepository = LikeRepository()
     private val userRepository = UserRepository()
+    private val uuid = userRepository.currentUser()!!.uid
 
     init {
         postsFilterdList = posts
@@ -67,25 +68,31 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
     }
 
     override fun getItemCount() = posts.size
+
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = postsFilterdList[position]
 
-        getUserInfo(post, holder)
-
         if (post.content == "") holder.binding.postContent.visibility = View.GONE
         if (post.image == "") holder.binding.postImage.visibility = View.GONE
+        if (post.image != "") Glide.with(context).load(post.image).into(holder.binding.postImage)
+
+        getUserInfo(post, holder)
 
         holder.binding.postContent.text = post.content
 
-        if (post.image != "") {
-            Glide.with(context).load(post.image).into(holder.binding.postImage)
-        }
+        // get like
+        getLikes(post, holder)
+        // check if the current user liked the current post
+        isLikeByMe(post, holder)
 
-        getLikeInfo(post, holder)
         getCommentInfo(post, holder)
 
         holder.binding.btnPostLike.setOnClickListener {
-            likePost(post.id)
+            val likeHash = HashMap<String, Any>()
+            likeHash["postId"] = post.id
+            likeHash["userId"] = uuid
+
+            likeRepository.addLike(post.id, uuid, likeHash)
         }
 
         holder.binding.btnPostComment.setOnClickListener {
@@ -98,27 +105,35 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
         holder.binding.btnPostSave.setOnClickListener {
             if (post.image != "") {
                 SaveFile(context).downloadImageFromFirestore(post.image!!)
+            } else {
+                val clipboard =
+                    context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("label", post.content)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(context, "Texte copié dans le presse-papier.", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
-    private fun likePost(postId: String) {
-        likeRepository.getLike(postId).collection("users")
-            .document(UserRepository().currentUser()!!.uid)
+    private fun getLikes(post: Post, holder: PostAdapter.PostViewHolder) {
+        likeRepository.getLikes(post).addSnapshotListener { querySnap, error ->
+            if (error != null) return@addSnapshotListener
+            if (querySnap != null) {
+                holder.binding.likeCount.text = querySnap.size().toString()
+            }
+        }
+    }
+
+    private fun isLikeByMe(post: Post, holder: PostAdapter.PostViewHolder) {
+        likeRepository.isLike(post.id, userRepository.currentUser()!!.uid)
             .addSnapshotListener { querySnap, error ->
                 if (error != null) return@addSnapshotListener
                 if (querySnap != null) {
-
-                    val userId = userRepository.currentUser()!!.uid
-
                     if (querySnap.exists()) {
-                        likeRepository.deleteLike(postId, userId)
+                        holder.binding.imgLikeBtn.setImageResource(R.drawable.baseline_favorite_24)
                     } else {
-
-                        val like = HashMap<String, Any>()
-                        like["userId"] = userId
-
-                        likeRepository.addLike(postId, userId, like)
+                        holder.binding.imgLikeBtn.setImageResource(R.drawable.baseline_unfavorite_24)
                     }
                 }
             }
@@ -133,33 +148,6 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
                     holder.binding.commentCount.text = querySnap.size().toString()
                 }
             }
-    }
-
-    private fun getLikeInfo(post: Post, holder: PostViewHolder) {
-
-        likeRepository.getLike(post.id).collection("users")
-            .addSnapshotListener { querySnap, error ->
-                if (error != null) return@addSnapshotListener
-                if (querySnap != null) {
-                    holder.binding.likeCount.text = querySnap.size().toString()
-                }
-            }
-
-        likeRepository.getLike(post.id).collection("users")
-            .document(UserRepository().currentUser()!!.uid)
-            .addSnapshotListener { querySnap, error ->
-                if (error != null) return@addSnapshotListener
-                if (querySnap != null) {
-//                    if (querySnap.exists()) {
-//                        holder.binding.imgLikeBtn.background =
-//                            ColorDrawable(Color.parseColor(R.color.blue.toString()))
-//                    } else {
-//                        holder.binding.imgLikeBtn.background =
-//                            ColorDrawable(Color.parseColor(R.color.dark_black.toString()))
-//                    }
-                }
-            }
-
     }
 
     private fun getUserInfo(post: Post, holder: PostViewHolder) {

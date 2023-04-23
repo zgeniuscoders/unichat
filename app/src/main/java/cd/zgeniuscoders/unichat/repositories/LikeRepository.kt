@@ -1,9 +1,11 @@
 package cd.zgeniuscoders.unichat.repositories
 
+import cd.zgeniuscoders.unichat.models.Post
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class LikeRepository {
     companion object {
@@ -11,24 +13,18 @@ class LikeRepository {
         val COLLECTION_REF = FirebaseFirestore.getInstance().collection(LIKE_COLLECTION)
     }
 
-    fun getLikes(): CollectionReference {
-        return COLLECTION_REF
+    fun isLike(postId: String, userId: String): DocumentReference {
+        return COLLECTION_REF.document(postId).collection("users")
+            .document(userId)
     }
 
-    fun getLike(LikeId: String): DocumentReference {
-        return COLLECTION_REF.document(LikeId)
+    fun getLikes(post: Post): CollectionReference {
+        return COLLECTION_REF.document(post.id).collection("users")
     }
 
-    fun addLike(key: String, userId: String, like: HashMap<String, Any>): Task<Void> {
-        return ChatRepository.COLLECTION_REF.document(key).collection("users").document(userId)
+    fun addLike(postId: String, userId: String, like: HashMap<String, Any>): Task<Void> {
+        return COLLECTION_REF.document(postId).collection("users").document(userId)
             .set(like)
     }
 
-    fun updateLike(LikeId: String, userId: String, like: HashMap<String, Any>): Task<Void> {
-        return COLLECTION_REF.document(LikeId).collection("users").document(userId).update(like)
-    }
-
-    fun deleteLike(likeId: String, userId: String): Task<Void> {
-        return COLLECTION_REF.document(likeId).collection("users").document(userId).delete()
-    }
 }
