@@ -22,23 +22,23 @@ class UserRepository {
         return COLLECTION_REF.whereArrayContains("number", contactList)
     }
 
-    fun getUsers(): DocumentReference {
+    fun all(): DocumentReference {
         return COLLECTION_REF.document()
     }
 
-    fun getUser(userId: String): DocumentReference {
+    fun findById(userId: String): DocumentReference {
         return COLLECTION_REF.document(userId)
     }
 
-    fun addUser(key: String, user: User): Task<Void> {
+    fun create(key: String, user: User): Task<Void> {
         return COLLECTION_REF.document(key).set(user)
     }
 
-    fun updateUser(userId: String, user: HashMap<String, Any>): Task<Void> {
+    fun update(userId: String, user: HashMap<String, Any>): Task<Void> {
         return COLLECTION_REF.document(userId).update(user)
     }
 
-    fun deleteUser(userId: String): Task<Void> {
+    fun delete(userId: String): Task<Void> {
         return COLLECTION_REF.document(userId).delete()
     }
 }

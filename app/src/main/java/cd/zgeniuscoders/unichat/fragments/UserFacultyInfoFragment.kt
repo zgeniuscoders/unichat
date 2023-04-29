@@ -59,7 +59,7 @@ class UserFacultyInfoFragment : Fragment() {
             hash["faculty"] = faculty
             hash["department"] = department
 
-            UserRepository().updateUser(uuid, hash).addOnCompleteListener {
+            UserRepository().update(uuid, hash).addOnCompleteListener {
 //                findNavController().navigate(R.id.action_userFacultyInfoFragment_to_userProfileImageFragment)
             }
         }

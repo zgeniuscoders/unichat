@@ -89,7 +89,7 @@ class UserProfileImageFragment : Fragment() {
         hash["createdAt"] = date
         hash["profile"] = imgUrl.toString()
 
-        UserRepository().updateUser(uuid, hash).addOnCompleteListener {
+        UserRepository().update(uuid, hash).addOnCompleteListener {
             dialog!!.dismiss()
 
             editor.putBoolean("isAuth", true)

@@ -14,14 +14,14 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             tools:src="@tools:sample/avatars" />
 
         <EditText
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/bg_search"
             android:hint="@string/search"

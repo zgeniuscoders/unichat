@@ -10,17 +10,20 @@ import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val userRepository = UserRepository()
-    private val userId = userRepository.currentUser()!!.uid
+    private lateinit var userRepository: UserRepository
+    private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userRepository = UserRepository()
+        userId = userRepository.currentUser()!!.uid
+
 
         binding.addPost.setOnClickListener {
-            Intent(this,AddPostActivity::class.java).apply {
+            Intent(this, AddPostActivity::class.java).apply {
                 startActivity(this)
             }
         }
@@ -32,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val hash = HashMap<String, Any>()
         hash["presence"] = true
 
-        userRepository.updateUser(userId, hash)
+//        userRepository.update(userId, hash)
 
     }
 
@@ -42,6 +45,6 @@ class MainActivity : AppCompatActivity() {
         val hash = HashMap<String, Any>()
         hash["presence"] = false
 
-        userRepository.updateUser(userId, hash)
+//        userRepository.update(userId, hash)
     }
 }

@@ -141,7 +141,7 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
 
     private fun getCommentInfo(post: Post, holder: PostViewHolder) {
         val commentRepository = CommentRepository()
-        commentRepository.getComment(post.id).collection("users")
+        commentRepository.findById(post.id)
             .addSnapshotListener { querySnap, error ->
                 if (error != null) return@addSnapshotListener
                 if (querySnap != null) {
@@ -152,7 +152,7 @@ class PostAdapter(private val context: Context, private val posts: ArrayList<Pos
 
     private fun getUserInfo(post: Post, holder: PostViewHolder) {
         val userRepository = UserRepository()
-        userRepository.getUser(post.userId).addSnapshotListener { querySnap, error ->
+        userRepository.findById(post.userId).addSnapshotListener { querySnap, error ->
             if (error != null) return@addSnapshotListener
             if (querySnap != null) {
                 holder.binding.postUserName.text = querySnap.get("username").toString()

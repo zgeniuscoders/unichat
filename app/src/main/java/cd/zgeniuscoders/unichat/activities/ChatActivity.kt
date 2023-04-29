@@ -31,7 +31,7 @@ class ChatActivity : AppCompatActivity() {
         receiverId = intent.getStringExtra("userId")
         senderId = userRepository.currentUser()!!.uid
 
-        userRepository.getUser(receiverId!!).addSnapshotListener { querySnap, error ->
+        userRepository.findById(receiverId!!).addSnapshotListener { querySnap, error ->
             if (error != null) return@addSnapshotListener
             if (querySnap != null) {
                 binding.username.text = querySnap.get("username").toString()

@@ -1,5 +1,6 @@
 package cd.zgeniuscoders.unichat.repositories
 
+import cd.zgeniuscoders.unichat.models.Comment
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
@@ -11,23 +12,25 @@ class CommentRepository {
         val COLLECTION_REF = FirebaseFirestore.getInstance().collection(COMMENT_COLLECTION)
     }
 
-    fun getComments(): CollectionReference {
-        return COLLECTION_REF
+    fun all(): CollectionReference {
+        return COLLECTION_REF.document().collection("users")
     }
 
-    fun getComment(commentId: String): DocumentReference {
-        return COLLECTION_REF.document(commentId)
+    fun findById(postId: String): CollectionReference {
+        return COLLECTION_REF.document(postId).collection("users")
     }
 
-    fun addComment(key: String, comment: HashMap<String, Any>): Task<Void> {
-        return ChatRepository.COLLECTION_REF.document(key).set(comment)
+    fun create(postId: String, comment: Comment): Task<Void> {
+        return ChatRepository.COLLECTION_REF.document(postId).collection("users").document()
+            .set(comment)
     }
 
-    fun updateComment(commentId: String, comment: HashMap<String, Any>): Task<Void> {
-        return COLLECTION_REF.document(commentId).update(comment)
+    fun update(postId: String, commentId: String, comment: HashMap<String, Any>): Task<Void> {
+        return COLLECTION_REF.document(postId).collection("users").document(commentId)
+            .update(comment)
     }
 
-    fun deleteComment(commentId: String): Task<Void> {
-        return COLLECTION_REF.document(commentId).delete()
+    fun delete(postId: String,commentId: String): Task<Void> {
+        return COLLECTION_REF.document(postId).collection("users").document(commentId).delete()
     }
 }

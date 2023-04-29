@@ -55,7 +55,7 @@ class UserProfileInfoFragment : Fragment() {
             number = number!!, id = uuid, username = edtUsername, email = edtEmail
         )
 
-        UserRepository().addUser(uuid, user).addOnCompleteListener {
+        UserRepository().create(uuid, user).addOnCompleteListener {
             findNavController().navigate(R.id.action_userProfileInfoFragment_to_userProfileImageFragment)
         }
 

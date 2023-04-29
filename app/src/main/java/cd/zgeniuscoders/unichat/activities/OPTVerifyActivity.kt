@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import cd.zgeniuscoders.unichat.R
 import cd.zgeniuscoders.unichat.databinding.ActivityOptverifyBinding
+import cd.zgeniuscoders.unichat.repositories.UserRepository
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -70,14 +71,39 @@ class OPTVerifyActivity : AppCompatActivity() {
             auth!!.signInWithCredential(credentials).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
 
-                    val sharedPreferences = getSharedPreferences("auth.number", Context.MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    editor.putString("number", edtNumber)
-                    editor.apply()
+                    UserRepository().findById("").addSnapshotListener { querySnap, error ->
+                        if (error != null) return@addSnapshotListener
+                        if (querySnap != null) {
+                            if (!querySnap.exists()) {
 
-                    Intent(this, CreateUserProfileActivity::class.java).apply {
-                        startActivity(this)
+                                val sharedPreferences =
+                                    getSharedPreferences("auth.number", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putString("number", edtNumber)
+                                editor.apply()
+
+                                Intent(this, CreateUserProfileActivity::class.java).apply {
+                                    startActivity(this)
+                                }
+
+                            } else {
+
+                                val sharedPreferences =
+                                    getSharedPreferences("auth", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putBoolean("isAuth", true)
+                                editor.apply()
+
+                                Intent(this, MainActivity::class.java).apply {
+                                    startActivity(this)
+                                }
+
+                            }
+
+                        }
                     }
+
+
                 } else {
                     Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
                 }
